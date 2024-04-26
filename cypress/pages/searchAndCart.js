@@ -63,12 +63,12 @@ export function addClothes() {
                         })
                         cy.get('.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2').find('a').invoke('removeAttr', 'target').click()
                 })
-                cy.get('#native_dropdown_selected_size_name').select('L')
-                cy.get('#native_dropdown_selected_size_name').contains('L').should('be.visible')
+                cy.get('#native_dropdown_selected_size_name').select('M')
+                cy.get('#native_dropdown_selected_size_name').contains('M').should('be.visible')
                 cy.contains('Add to Cart').should('be.visible').click()
 
                 cy.visit(sweaterSearchPage)
-                
+
                 cy.get('.a-declarative .a-spacing-base').eq(3).within((M_Size_clothe) => {
                         cy.get('.a-size-base-plus.a-color-base.a-text-normal').first().invoke('text').then((clotheName) => {
                                 M_Size_clothe_Name = clotheName
@@ -80,8 +80,8 @@ export function addClothes() {
 
                         cy.get('.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2').find('a').invoke('removeAttr', 'target').click()
                 })
-                cy.get('#native_dropdown_selected_size_name').select('M')
-                cy.get('#native_dropdown_selected_size_name').contains('M').should('be.visible')
+                cy.get('#native_dropdown_selected_size_name').select('L')
+                cy.get('#native_dropdown_selected_size_name').contains('L').should('be.visible')
                 cy.contains('Add to Cart').should('be.visible').click()
         })
 }
@@ -108,8 +108,8 @@ export function verifyCartPage() {
         })
 
         cy.get('.sc-grid-item-product-title .sc-grid-item-product-title').eq(2).invoke('text').then((secondBookName) => {
-                expect(secondBookName).to.contain(secondBookTitle)
-        })
+                        expect(secondBookName).to.contain(secondBookTitle)
+                })
 
         cy.get('.a-size-medium.sc-product-price').eq(2).invoke('text').then((secondBookCost) => {
                 expect(secondBookCost).to.contain(secondBookPrice)
@@ -140,12 +140,16 @@ export function verifyCheckoutPage() {
 }
 
 export function deleteCartItem() {
-        cy.get('.a-size-small.sc-action-delete [type="submit"]').then(($element)=>{
-                for(let i=$element.length-1; i>=0; i--){
+        cy.get('.a-size-small.sc-action-delete [type="submit"]').then(($element) => {
+                for (let i = $element.length - 1; i >= 0; i--) {
                         cy.get('.a-size-small.sc-action-delete [type="submit"]').eq(i).click({ shiftKey: true })
                         cy.wait(1200)
+                        cy.window().then(win => {
+                                win.close();
+                        });
                         goToCartPage()
                 }
         })
+        cy.get('.a-size-small.sc-action-delete [type="submit"]').should('not.exist');
         cy.get('.a-spacing-mini.a-spacing-top-base').should('contain', 'Your Amazon Cart is empty.')
 }
