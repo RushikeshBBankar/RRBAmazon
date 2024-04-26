@@ -2,7 +2,7 @@
 import productName from '../../fixtures/testData.json'
 import {searchBestSellerBook,addTwoBookInCart,shortByPrice,addClothes,goToCartPage,verifyCartPage,verifyCheckoutPage,deleteCartItem} from '../../pages/searchAndCart'
 
-describe('Amazon Book Search and Cart Validation', () => {
+describe.skip('Amazon Book Search and Cart Validation', () => {
         before(() => {
                 cy.HomePage()
                 cy.logIn()

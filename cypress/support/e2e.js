@@ -1,8 +1,8 @@
 
 import './commands'
-import "allure-cypress/commands";
+//import "allure-cypress/commands";
 
-require('cypress-xpath');
+//require('cypress-xpath');
 
 beforeEach(() => {
         Cypress.on('uncaught:exception', (err, runnable) => {
